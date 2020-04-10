@@ -10,14 +10,14 @@ import java.util.Scanner;
 
 public class Text {
     private String text = "";
-    private ArrayList<String> paragraphs;
+    private ArrayList<Paragraph> paragraphs;
     private String filePath;
 
     private static final Logger LOG = LoggerFactory.getLogger(Text.class);
 
     public Text(String filePath) {
         this.filePath = filePath;
-        //ArrayList<Paragraph> paragraphs = new ArrayList<Paragraph>();
+        paragraphs = new ArrayList<Paragraph>();
     }
 
     public void readText() {
@@ -28,7 +28,7 @@ public class Text {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 str = scanner.nextLine();
-                text = text + str + "\n";
+                text += str + "\n";
             }
         } catch (FileNotFoundException e) {
             LOG.debug("File not found.");
@@ -43,11 +43,19 @@ public class Text {
 //        this.paragraphs.add(paragraph);
 //    }
 
-    public void textParser() {
+    public void parserText() {
+        LOG.debug("Text parser started...");
+        //ArrayList<String> strParagraph = new ArrayList();
         //ArrayList<Paragraph> paragraphs = new ArrayList<Paragraph>();
-        for (String s:text.split(".")) {
-            paragraphs.add(s);
+        for (String s:text.split("\\n")) {
+            //strParagraph.add(s);
+            //System.out.println(s);
+            //Paragraph par = new Paragraph(s);  //   НЕ РАБОТАЕТ  !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //System.out.println(par);
+            paragraphs.add(new Paragraph(s));
         }
+//        for (String s: strParagraph)
+//            paragraphs.add(new Paragraph(s));
         //return paragraphs;
     }
 
@@ -55,10 +63,18 @@ public class Text {
         return paragraphs;
     }
 
+    public void parseParagraphInText() {
+        for (Paragraph p: paragraphs) {
+            p.parserParagraph();
+        }
+    }
+
+
+
     @Override
     public String toString() {
         return "Text{" +
-                "paragraphs= " + paragraphs +
+                "paragraphs= " + text +
                 '}';
     }
 }
