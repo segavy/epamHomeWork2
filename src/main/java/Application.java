@@ -1,9 +1,6 @@
 import Text.Text;
-import Text.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
 
 public class Application {
 
@@ -12,22 +9,22 @@ public class Application {
     public static void main(String[] args) {
         LOG.debug("Program started");
 
-        Text text = new Text("inputFile");
-        text.readText();
+        Text text = new Text("");
+        text.readText("inputFile");
         //System.out.println(text.getText());
 
-        text.parserText();
-        System.out.println(text.getParagraph());
 
-        //for (Paragraph par: )
-        text.parseParagraphInText();
-
-        //System.out.println(ArrayList< Text.Sentence >);
-
-        Parser parser = new Parser();
+        text.parserText();   // - разбиваем текст на абзацы
+        //System.out.println(text.getParagraphs());   //Список параграфов текстом
 
 
+        //-------------------------------- Парсим текст на параграфы и предложения ----  не нужно??????
+        text.parseParagraphs();
 
+        //Parser parser = new Parser();
+        //parser.changeWord("AAA", 5);
+
+        text.changeWordsInParagraphs("AAAAA", 5);
 
     }
 }

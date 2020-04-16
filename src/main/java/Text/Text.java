@@ -9,67 +9,86 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Text {
-    private String text = "";
+    private String text;
     private ArrayList<Paragraph> paragraphs;
-    private String filePath;
+    private ArrayList<Paragraph> paragraphsNew;
 
     private static final Logger LOG = LoggerFactory.getLogger(Text.class);
 
-    public Text(String filePath) {
-        this.filePath = filePath;
+    public Text(String text) {
+        this.text = text;
         paragraphs = new ArrayList<Paragraph>();
     }
 
-    public void readText() {
-        LOG.debug("Read text started...");
+    // Прочитали текст из файла и сохранили в переменную text
+    public void readText(String filePath) {
+        LOG.debug("Reading text started...");
         String str;
         File file = new File(filePath);
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 str = scanner.nextLine();
-                text += str + "\n";
+                text = text.concat(str).concat("\r\n");
             }
+            //System.out.println(text);
         } catch (FileNotFoundException e) {
             LOG.debug("File not found.");
         }
     }
 
+
+
     public String getText() {
         return text;
     }
 
-//    public void addParagraph(Paragraph paragraph) {
-//        this.paragraphs.add(paragraph);
-//    }
-
+    //Разбиваем текст на абзацы
     public void parserText() {
         LOG.debug("Text parser started...");
-        //ArrayList<String> strParagraph = new ArrayList();
-        //ArrayList<Paragraph> paragraphs = new ArrayList<Paragraph>();
-        for (String s:text.split("\\n")) {
-            //strParagraph.add(s);
-            //System.out.println(s);
-            //Paragraph par = new Paragraph(s);  //   НЕ РАБОТАЕТ  !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //System.out.println(par);
+        for (String s:text.split("\\r\\n")) {
             paragraphs.add(new Paragraph(s));
         }
-//        for (String s: strParagraph)
-//            paragraphs.add(new Paragraph(s));
-        //return paragraphs;
     }
 
-    public ArrayList getParagraph() {
+    //не нужно???
+    public ArrayList getParagraphs() {
         return paragraphs;
     }
 
-    public void parseParagraphInText() {
+    //??????????????????????????????????????? не нужно
+    public void parseParagraphs() {
         for (Paragraph p: paragraphs) {
-            p.parserParagraph();
+            p.parseParagraph();
         }
     }
 
+    ///* пытамся вставить строку вместо слов
+    public void changeWordsInParagraphs(String word, int letterCount) {
+        paragraphsNew = new ArrayList<Paragraph>();
+        for (Paragraph p: paragraphs) {
+            //LOG.debug("1 - changeWordsInParagraph started...");
+            ArrayList<Sentence> sentencesNew = new ArrayList<Sentence>();
+            //sentencesNew = p.getSentences();
+            for (Sentence s: p.getSentences()) {    //   ------   какой-то косяк  !!!!!!!!!!!!!!! -----
+                //LOG.debug("2 - changeWordsInParagraphs started...");
+                String sNew = s.changeWord(word, letterCount);
+                sentencesNew.add(new Sentence(sNew));
+                //System.out.println(sNew);
+                //LOG.debug("2 - changeWordsInParagraphs finished...");
+            }
+            //LOG.debug("1 - changeWordsInParagraph finished...");
+            System.out.println(p.getSentencesNew());
 
+            //paragraphsNew.add(new Paragraph(p));
+            //p.parseSentenceInParagraph(word, letterCount) = new Paragraph();
+        }
+        //return paragraphsNew;
+    }
+    //*/
+
+    public void getTextNew() {
+    }
 
     @Override
     public String toString() {

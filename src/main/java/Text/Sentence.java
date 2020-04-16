@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Sentence {
     private String sentence;
+    private String sentenceNew;
 
     public Sentence(String sentence) {
         this.sentence = sentence;
@@ -13,12 +14,19 @@ public class Sentence {
         return sentence;
     }
 
-    public String changeWord(String word, int count) {
-        return(sentence.replaceAll("\\b[a-zA-Z]{" + count + "}\\b", word));
+    public String changeWord(String word, int letterCount) {
+        sentenceNew = sentence.replaceAll("\\b[a-zA-Z]{" + letterCount + "}\\b", word);
+
+        System.out.println(sentenceNew);
+        return sentenceNew;
     }
 
     @Override
     public String toString() {
-        return "\n" + sentence;
+        return
+                //"Sentence{" +
+                "sentence='" +
+                sentence + '\'' +
+                '}';
     }
 }
