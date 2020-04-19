@@ -1,11 +1,11 @@
-import TextStructure.Text2;
+import OLD_TextStructure.Text2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Application2 {
+public class OLD_Application2 {
 
-    //private static final Logger LOG = LoggerFactory.getLogger(Application2.class);
-    private static final Logger LOG = LoggerFactory.getLogger(Application2.class);
+    //private static final Logger LOG = LoggerFactory.getLogger(OLD_Application2.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OLD_Application2.class);
 
     public static void main(String[] args) {
         LOG.debug("Program started");

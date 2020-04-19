@@ -1,4 +1,4 @@
-package TextStructure;
+package OLD_TextStructure;
 
 public class Sentence2 {
     private String sentence;

@@ -1,6 +1,4 @@
-package Text;
-
-import java.util.ArrayList;
+package OLD_Text;
 
 public class Sentence {
     private String sentence;

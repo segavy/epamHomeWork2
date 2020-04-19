@@ -1,18 +1,16 @@
-import Text.Text;
+import OLD_Text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Application {
+public class OLD_Application {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OLD_Application.class);
 
     public static void main(String[] args) {
         LOG.debug("Program started");
 
         Text text = new Text("");
         text.readText("inputFile");
-        //System.out.println(text.getText());
-
 
         text.parserText();   // - разбиваем текст на абзацы
         //System.out.println(text.getParagraphs());   //Список параграфов текстом

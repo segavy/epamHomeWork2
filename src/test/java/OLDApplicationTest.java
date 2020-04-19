@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-public class ApplicationTest {
+public class OLDApplicationTest {
 
     @Test
     public void test() {

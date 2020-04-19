@@ -60,7 +60,7 @@ public class ApplicationOLD {
     public static void readfile() throws FileNotFoundException {
         String inputText;
         File file = new File("inputFile");
-        //Text text = new Text("");
+        //OLD_Text text = new OLD_Text("");
         Scanner scanner = new Scanner(file);
         //Scanner scanner2 = new Scanner(new File(""));
         while (scanner.hasNextLine()) {

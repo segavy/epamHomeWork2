@@ -1,4 +1,4 @@
-package Text;
+package OLD_Text;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,29 +37,15 @@ public class Text {
         }
     }
 
-
-
     public String getText() {
         return text;
     }
 
     //Разбиваем текст на абзацы
     public void parserText() {
-        LOG.debug("Text parser started...");
+        LOG.debug("OLD_Text parser started...");
         for (String s:text.split("\\r\\n")) {
             paragraphs.add(new Paragraph(s));
-        }
-    }
-
-    //не нужно???
-    public ArrayList getParagraphs() {
-        return paragraphs;
-    }
-
-    //??????????????????????????????????????? не нужно
-    public void parseParagraphs() {
-        for (Paragraph p: paragraphs) {
-            p.parseParagraph();
         }
     }
 
@@ -80,7 +66,7 @@ public class Text {
             //LOG.debug("1 - changeWordsInParagraph finished...");
             System.out.println(p.getSentencesNew());
 
-            //paragraphsNew.add(new Paragraph(p));
+            //paragraphsNew.add(p);
             //p.parseSentenceInParagraph(word, letterCount) = new Paragraph();
         }
         //return paragraphsNew;
@@ -92,8 +78,21 @@ public class Text {
 
     @Override
     public String toString() {
-        return "Text{" +
+        return "OLD_Text{" +
                 "paragraphs= " + text +
                 '}';
+    }
+
+
+    //не нужно???
+    public ArrayList getParagraphs() {
+        return paragraphs;
+    }
+
+    //??????????????????????????????????????? не нужно
+    public void parseParagraphs() {
+        for (Paragraph p: paragraphs) {
+            p.parseParagraph();
+        }
     }
 }
