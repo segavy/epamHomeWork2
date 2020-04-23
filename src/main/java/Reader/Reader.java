@@ -1,6 +1,5 @@
 package Reader;
 
-import OLD_Text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +17,6 @@ public class Reader {
 
     public void readFile(String path) {
         String str;
-        //String text = "";
         File file = new File(path);
         try {
             Scanner scanner = new Scanner(file);
@@ -26,12 +24,13 @@ public class Reader {
                 str = scanner.nextLine();
                 text = text.concat(str).concat("\n");
             }
+            scanner.close();
         } catch (FileNotFoundException e) {
-            LOG.debug("File not found");
+            LOG.debug("File not found, we received the next exception: ", e);
 
             e.printStackTrace();
         }
-        System.out.println(text);
+        //System.out.println(text);
     }
 
     public String getText() {

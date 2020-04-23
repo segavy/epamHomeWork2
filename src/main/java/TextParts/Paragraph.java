@@ -1,14 +1,22 @@
 package TextParts;
 
-public class Paragraph implements Lexema{
-    private String paragraph;
+import java.util.ArrayList;
 
-    public Paragraph(String paragraph) {
+public class Paragraph implements Lexema{
+    private ArrayList<Lexema> paragraph;
+
+    public Paragraph(ArrayList<Lexema> paragraph) {
         this.paragraph = paragraph;
     }
 
-    public String getParagraph() {
+    public ArrayList<Lexema> getParagraph() {
         return paragraph;
     }
 
+    @Override
+    public String toString() {
+        return "Paragraph{" +
+                "paragraph=" + paragraph +
+                '}';
+    }
 }

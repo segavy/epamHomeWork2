@@ -1,5 +1,6 @@
 import Reader.Reader;
 import Reader.Parser;
+import TextParts.Paragraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,14 +17,16 @@ public class AppWithText {
         Reader reader = new Reader();
         reader.readFile(unc2);
 
-        //print text as chars
+        //print text as chars. Transform after testing     ???????????????????
         reader.outputChars(reader.transformTextToArray(reader.getText()));
 
         //parse array of chars to own classes
         Parser parser = new Parser();
         parser.parsText(reader.transformTextToArray(reader.getText()));
 
-        System.out.println(parser.getPartsOfText());
+        //System.out.println(parser.getAllTextInGeneralArray());
+
+
 
     }
 }
