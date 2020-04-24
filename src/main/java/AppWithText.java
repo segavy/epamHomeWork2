@@ -1,8 +1,14 @@
 import Reader.Reader;
 import Reader.Parser;
+import Reader.Issue;
+import TextParts.Lexema;
 import TextParts.Paragraph;
+import TextParts.Sentence;
+import TextParts.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
 
 public class AppWithText {
 
@@ -23,6 +29,12 @@ public class AppWithText {
         //parse array of chars to own classes
         Parser parser = new Parser();
         parser.parsText(reader.transformTextToArray(reader.getText()));
+
+        Issue issue = new Issue();
+        System.out.println(parser.getText2());
+
+
+
 
         //System.out.println(parser.getAllTextInGeneralArray());
 

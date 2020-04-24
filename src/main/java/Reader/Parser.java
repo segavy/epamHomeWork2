@@ -2,10 +2,13 @@ package Reader;
 
 import TextParts.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
-    ArrayList<Lexema> allTextInGeneralArray = new ArrayList<Lexema>();
+    private ArrayList<Lexema> allTextInGeneralArray = new ArrayList<Lexema>();
+    private ArrayList<Lexema> text= new ArrayList<Lexema>();
+
     //ArrayList<Lexema>
 
     //parse the array of characters into common Lexema ArrayList
@@ -14,20 +17,20 @@ public class Parser {
         String tempWord = "";
         ArrayList<Lexema> tempSentence = new ArrayList<Lexema>();
         ArrayList<Lexema> tempParagraph = new ArrayList<Lexema>();
-        ArrayList<Lexema> text= new ArrayList<Lexema>();
+        //ArrayList<Lexema> text= new ArrayList<Lexema>();
         for (char c: chars) {
             //sentence = sentence.concat(Character.toString(c));
-            if (Character.isLetterOrDigit(c) == true) {
+            if (Character.isLetterOrDigit(c)) {
                 tempWord = tempWord.concat(Character.toString(c));
                 //sentence = sentence.concat(Character)
             } else
-                if ((Character.isSpaceChar(c) == true) && (tempWord != "")) {
+                if ((Character.isSpaceChar(c)) && (!tempWord.equals(""))) {
                     Word w = new Word(tempWord);
                     allTextInGeneralArray.add(w);
                     tempSentence.add(w);
                     tempWord = "";
                 } else
-                    if ((c == ',') && (tempWord != "")) {
+                    if ((c == ',') && (!tempWord.equals(""))) {
                         Word w = new Word(tempWord);
                         allTextInGeneralArray.add(w);
                         tempSentence.add(w);
@@ -43,12 +46,13 @@ public class Parser {
                             tempWord = "";
                             Punctuation p = new Punctuation(c);
                             allTextInGeneralArray.add(p);
-                            tempSentence.add(p);
-                            Sentence s = new Sentence(tempSentence); //     НЕ РАБОТАЕТ   !!!!!!!
-                            //s = tempSentence;
-                            tempParagraph.add(s);
+                            //tempSentence.add(p);
+                            //Sentence s = new Sentence(tempSentence); //     НЕ РАБОТАЕТ   ???????
+                            ArrayList<Lexema> tempS = new ArrayList<Lexema>(tempSentence);
+                            tempParagraph.add(new Sentence(tempS));
+                            tempParagraph.add(p);
 
-                            //System.out.println(tempParagraph);
+                            //System.out.println(tempParagraph);   //   РАБОТАЕТ
 
                             //System.out.println(tempSentence);
                             tempSentence.clear();
@@ -57,11 +61,13 @@ public class Parser {
 
                                 Punctuation p = new Punctuation(c);
                                 allTextInGeneralArray.add(p);
-                                text.add(new Paragraph(tempParagraph));
+                                ArrayList<Lexema> tempP = new ArrayList<Lexema>(tempParagraph);
+                                text.add(new Paragraph(tempP));
                                 text.add(p);
+                                //System.out.println(tempParagraph);  //  НЕ РАБОТАЕТ
+
                                 //System.out.println(allTextInGeneralArray); //   РАБОТАЕТ
                                 //tempParagraph.add(tempSentence);
-                                System.out.println(tempParagraph);  //  НЕ РАБОТАЕТ
                                 //System.out.println();
 
                                 //System.out.println(text);
@@ -70,7 +76,10 @@ public class Parser {
                             } //else continue;
         }
         //System.out.println(text);
+    }
 
+    public ArrayList<Lexema> getText2() {
+        return text;
     }
 
     public ArrayList<Lexema> getAllTextInGeneralArray() {
@@ -86,12 +95,12 @@ public class Parser {
 //        }
 //    }
 
-    public String getInitialText(char[] chars) {
-        String text = "";
-        for (char c : chars) {
-            text+=Character.toString(c);
-        }
-        return text;
-    }
+//    public String getInitialText(char[] chars) {
+//        String text = "";
+//        for (char c : chars) {
+//            text.concat(Character.toString(c));
+//        }
+//        return text;
+//    }
 
 }

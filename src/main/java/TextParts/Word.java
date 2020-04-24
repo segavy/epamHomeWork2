@@ -11,6 +11,10 @@ public class Word implements Lexema{
         return value;
     }
 
+    public String changeWordWithSubstring (String substring) {
+        return this.value = substring;
+    }
+
     @Override
     public String toString() {
         return "Word{" +

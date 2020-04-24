@@ -53,25 +53,14 @@ public class Text {
     public void changeWordsInParagraphs(String word, int letterCount) {
         paragraphsNew = new ArrayList<Paragraph>();
         for (Paragraph p: paragraphs) {
-            //LOG.debug("1 - changeWordsInParagraph started...");
             ArrayList<Sentence> sentencesNew = new ArrayList<Sentence>();
-            //sentencesNew = p.getSentences();
             for (Sentence s: p.getSentences()) {    //   ------   какой-то косяк  !!!!!!!!!!!!!!! -----
-                //LOG.debug("2 - changeWordsInParagraphs started...");
                 String sNew = s.changeWord(word, letterCount);
                 sentencesNew.add(new Sentence(sNew));
-                //System.out.println(sNew);
-                //LOG.debug("2 - changeWordsInParagraphs finished...");
             }
-            //LOG.debug("1 - changeWordsInParagraph finished...");
             System.out.println(p.getSentencesNew());
-
-            //paragraphsNew.add(p);
-            //p.parseSentenceInParagraph(word, letterCount) = new Paragraph();
         }
-        //return paragraphsNew;
     }
-    //*/
 
     public void getTextNew() {
     }
@@ -82,7 +71,6 @@ public class Text {
                 "paragraphs= " + text +
                 '}';
     }
-
 
     //не нужно???
     public ArrayList getParagraphs() {

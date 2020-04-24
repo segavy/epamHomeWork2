@@ -9,6 +9,14 @@ public class Text implements Lexema{
         this.text = text;
     }
 
+    public ArrayList<Lexema> getText() {
+        return text;
+    }
+
+    public void writeText() {
+        System.out.println(text);
+    }
+
     @Override
     public String toString() {
         return "Text{" +

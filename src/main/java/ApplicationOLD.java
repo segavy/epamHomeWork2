@@ -26,21 +26,12 @@ public class ApplicationOLD {
                 "an exception will be thrown. In C inapplicable flags are silently ignored. " +
                 "The format strings are thus intended to be recognizable to C programmers " +
                 "but not necessarily completely compatible with those in C.\n";
-        //System.out.println(str);
 
         // Разделение абзаца на предложения
         ArrayList<String> sentence = new ArrayList();
         for (String s:str.split("[.!?]")) {
             sentence.add(s);
         }
-        //System.out.println(sentence);
-
-//        for (String s1: sentence) {
-//            newString = newString.concat(s1+". ");
-//        }
-
-        //System.out.println(newString);
-        //System.out.printf("hello %s and %d \n", 2+1, 4);
 
         try {
             readfile();
@@ -53,20 +44,16 @@ public class ApplicationOLD {
         int count = 5;
         String result = str.replaceAll("\\b[a-zA-Z]{" + count + "}\\b", "AAA");
         System.out.println(result);
-
         readfile();
     }
 
     public static void readfile() throws FileNotFoundException {
         String inputText;
         File file = new File("inputFile");
-        //OLD_Text text = new OLD_Text("");
         Scanner scanner = new Scanner(file);
-        //Scanner scanner2 = new Scanner(new File(""));
         while (scanner.hasNextLine()) {
             String sss = scanner.nextLine();
             System.out.println(sss);
         }
     }
-
 }
