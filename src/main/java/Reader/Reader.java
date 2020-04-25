@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Reader {
-    String text = "";
+    private String text = "";
 
     private static final Logger LOG = LoggerFactory.getLogger(Reader.class);
 
@@ -38,11 +38,10 @@ public class Reader {
     }
 
     public char[] transformTextToArray(String text) {
-        char[] chars = text.toCharArray();
-        return chars;
+        return text.toCharArray();
     }
 
-    //delete after testing
+    //delete after testing   !!!!!!!!!!!!
     public void outputChars(char[] chars)
     {
         for (char c: chars) {

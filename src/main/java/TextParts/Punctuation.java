@@ -7,7 +7,7 @@ public class Punctuation implements Lexema{
         this.punctuation = punctuation;
     }
 
-    public char getPunctuation() {
+    public char getValue() {
         return punctuation;
     }
 
@@ -17,4 +17,5 @@ public class Punctuation implements Lexema{
                 "punctuation='" + punctuation + "\'" +
                 '}';
     }
+
 }

@@ -1,14 +1,7 @@
 import Reader.Reader;
 import Reader.Parser;
-import Reader.Issue;
-import TextParts.Lexema;
-import TextParts.Paragraph;
-import TextParts.Sentence;
-import TextParts.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
 
 public class AppWithText {
 
@@ -18,26 +11,25 @@ public class AppWithText {
         String unc = "inputFile";
         String unc2 = "testFile";
 
-        LOG.debug("Hello !");
+        LOG.debug("Program started.");
 
         Reader reader = new Reader();
         reader.readFile(unc2);
+        //reader.readFile(unc);
 
         //print text as chars. Transform after testing     ???????????????????
-        reader.outputChars(reader.transformTextToArray(reader.getText()));
+//        reader.outputChars(reader.transformTextToArray(reader.getText()));
 
-        //parse array of chars to own classes
+        //parse text of chars to different classes
         Parser parser = new Parser();
         parser.parsText(reader.transformTextToArray(reader.getText()));
 
-        Issue issue = new Issue();
-        System.out.println(parser.getText2());
 
 
+        parser.changeWordWithSubstring("AAA", 3);
 
-
+        System.out.println(parser.getTextAsArray());
         //System.out.println(parser.getAllTextInGeneralArray());
-
 
 
     }

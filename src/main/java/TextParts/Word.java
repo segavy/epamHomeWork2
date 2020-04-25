@@ -11,7 +11,16 @@ public class Word implements Lexema{
         return value;
     }
 
-    public String changeWordWithSubstring (String substring) {
+    public void setValue(String str) {
+        value = value.replace(value, str);
+    }
+
+    public boolean checkLength(int length) {
+        return value.length() == length;
+    }
+
+
+    public String changeWordWithSubstring (String substring) {  //   а нужен ли  ????
         return this.value = substring;
     }
 
