@@ -40,6 +40,22 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j.impl/log4j12 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j.impl</groupId>-->
+            <!--<artifactId>log4j12</artifactId>-->
+            <!--<version>1.7.2</version>-->
+        <!--</dependency>-->
+
+
     </dependencies>
 
 </project>

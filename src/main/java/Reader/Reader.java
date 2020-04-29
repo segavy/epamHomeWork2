@@ -12,25 +12,20 @@ public class Reader {
 
     private static final Logger LOG = LoggerFactory.getLogger(Reader.class);
 
-//    public Reader() {
-//    }
-
     public void readFile(String path) {
         String str;
         File file = new File(path);
+        Scanner scanner;
         try {
-            Scanner scanner = new Scanner(file);
+            scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 str = scanner.nextLine();
                 text = text.concat(str).concat("\n");
             }
-            scanner.close();
         } catch (FileNotFoundException e) {
-            LOG.debug("File not found, we received the next exception: ", e);
-
-            e.printStackTrace();
-        }
-        //System.out.println(text);
+            LOG.debug("File not found, please review the text exception: ", e);
+            System.exit(0);
+        } //finally {scanner.close();}
     }
 
     public String getText() {
@@ -48,4 +43,5 @@ public class Reader {
             System.out.print(c);
         }
     }
+
 }

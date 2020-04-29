@@ -1,138 +1,118 @@
 package Reader;
 
 import TextParts.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Parser {
-    private ArrayList<Lexema> allTextInGeneralArray = new ArrayList<Lexema>();
-    private ArrayList<Lexema> text= new ArrayList<Lexema>();
+    private ArrayList<Lexema> allTextInGeneralList = new ArrayList<Lexema>();
+    private ArrayList<Lexema> textAsList = new ArrayList<Lexema>();
 
-    //parse the array of characters into common Lexema ArrayList
+    private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
+
     public void parsText(char[] chars) {
         String tempWord = "";
         ArrayList<Lexema> tempSentence = new ArrayList<Lexema>();
         ArrayList<Lexema> tempParagraph = new ArrayList<Lexema>();
-        for (char c: chars) {
+        for (char c : chars) {
             if (Character.isLetterOrDigit(c)) {
                 tempWord = tempWord.concat(Character.toString(c));
-            } else
-                if ((Character.isSpaceChar(c)) && (!tempWord.equals(""))) {
-                    Word w = new Word(tempWord);
-                    allTextInGeneralArray.add(w);
-                    tempSentence.add(w);
-                    tempWord = "";
-                } else
-                    if ((c == ',') && (!tempWord.equals(""))) {
-                        Word w = new Word(tempWord);
-                        allTextInGeneralArray.add(w);
-                        tempSentence.add(w);
-                        tempWord = "";
-                        Punctuation p = new Punctuation(c);
-                        allTextInGeneralArray.add(p);
-                        tempSentence.add(p);
-                    } else
-                        if (c == ('.') | c == ('!') | c == ('?')) {
-                            Word w = new Word(tempWord);
-                            allTextInGeneralArray.add(w);
-                            tempSentence.add(w);
-                            tempWord = "";
-                            Punctuation p = new Punctuation(c);
-                            allTextInGeneralArray.add(p);
-                            //ArrayList<Lexema> tempS = new ArrayList<Lexema>(tempSentence);
-                            tempParagraph.add(new Sentence(new ArrayList<Lexema>(tempSentence)));
-                            tempParagraph.add(p);
-                            tempSentence.clear();
-                        } else
-                            if (c == '\n') {
-
-                                Punctuation p = new Punctuation(c);
-                                allTextInGeneralArray.add(p);
-                                ArrayList<Lexema> tempP = new ArrayList<Lexema>(tempParagraph);
-                                text.add(new Paragraph(tempP));
-                                text.add(p);
-                                //System.out.println(tempParagraph);  //  НЕ РАБОТАЕТ
-
-                                //System.out.println(allTextInGeneralArray); //   РАБОТАЕТ
-                                //tempParagraph.add(tempSentence);
-                                //System.out.println();
-
-                                //System.out.println(text);
-                                tempParagraph.clear();
-
-                            } //else continue;
+            } else if ((Character.isSpaceChar(c)) && (!tempWord.equals(""))) {
+                Word w = new Word(tempWord);
+                allTextInGeneralList.add(w);
+                tempSentence.add(w);
+                tempWord = "";
+            } else if ((c == ',') && (!tempWord.equals(""))) {
+                Word w = new Word(tempWord);
+                allTextInGeneralList.add(w);
+                tempSentence.add(w);
+                tempWord = "";
+                Punctuation p = new Punctuation(c);
+                allTextInGeneralList.add(p);
+                tempSentence.add(p);
+            } else if (c == ('.') | c == ('!') | c == ('?')) {
+                Word w = new Word(tempWord);
+                allTextInGeneralList.add(w);
+                tempSentence.add(w);
+                tempWord = "";
+                Punctuation p = new Punctuation(c);
+                allTextInGeneralList.add(p);
+                tempParagraph.add(new Sentence(new ArrayList<Lexema>(tempSentence)));
+                tempParagraph.add(p);
+                tempSentence.clear();
+            } else if (c == '\n') {
+                Punctuation p = new Punctuation(c);
+                allTextInGeneralList.add(p);
+                ArrayList<Lexema> tempP = new ArrayList<Lexema>(tempParagraph);
+                textAsList.add(new Paragraph(tempP));
+                textAsList.add(p);
+                tempParagraph.clear();
+            } //else continue;
         }
-        //System.out.println(text);
+        LOG.debug("Parsing of the text finished successfully.");
     }
 
-    public ArrayList<Lexema> getTextAsArray() {
-        return text;
+    public ArrayList<Lexema> getTextAsList() {
+        return textAsList;
     }
 
-    public ArrayList<Lexema> getAllTextInGeneralArray() {
-        return allTextInGeneralArray;
+    public String convertBackLexemaToString(ArrayList text) {
+        String outputsText = "";
+        for (Lexema paragr : this.textAsList) {
+            if (paragr instanceof Paragraph) {
+                for (Lexema senten : ((Paragraph) paragr).getParagraph()) {
+                    if (senten instanceof Sentence) {
+                        for (Lexema word : ((Sentence) senten).getSentence()) {
+                            if (word instanceof Word) {
+                                if (((Sentence) senten).getSentence().indexOf(word) != 0) {outputsText = outputsText.concat(" ");}
+                                outputsText = outputsText.concat(((Word) word).getValue());
+                            } else
+                            if (word instanceof Punctuation) {
+                                outputsText = outputsText.concat(Character.toString(((Punctuation) word).getValue()));
+                            }
+                        }
+                    } else
+                        if (senten instanceof Punctuation) {
+                            outputsText = outputsText.concat(Character.toString(((Punctuation) senten).getValue()));
+                            if (((Paragraph) paragr).getParagraph().indexOf(senten) != (((Paragraph) paragr).getParagraph().size()-1)) {
+                                outputsText = outputsText.concat(" ");
+                            }
+                        }
+                }
+            } else
+                if (paragr instanceof Punctuation) outputsText = outputsText.concat(Character.toString(((Punctuation) paragr).getValue()));
+        }
+        return outputsText;
     }
 
-//    public ArrayList<Lexema> createCopy(ArrayList<Lexema> list) {
-//        ArrayList<Lexema> newList = new ArrayList();
-//        for (Lexema lex: list) {
-//            newList.add(lex);
-//        }
-//        return newList;
-//    }
-
-//    public String getSentence (Sentence s) {
-//        String sent = "";
-//        return sent;
-//    }
-
+    public String changeWordWithSubstring2(String incomingString, String someSubstring, int wordLength) {
+        return incomingString.replaceAll("\\b[a-zA-Z]{" + wordLength + "}\\b", someSubstring);
+    }
 
     public void changeWordWithSubstring(String someSubstring, int wordLength) {
-        for (Lexema t: text) {
+        for (Lexema t: textAsList) {
             if (t instanceof Paragraph) {
-                for (Lexema p: ((Paragraph) t).getParagraph()) {
+                for (Lexema p : ((Paragraph) t).getParagraph()) {
                     if (p instanceof Sentence) {
                         String newSentence = "";
-                        for (Lexema s: ((Sentence) p).getSentence()) {
+                        for (Lexema s : ((Sentence) p).getSentence()) {
                             if (s instanceof Word) {
-                                newSentence = newSentence.concat(((Word) s).getValue()).concat(" ");
-                            } else
-                                if (s instanceof Punctuation) newSentence = newSentence.concat(Character.toString(((Punctuation) s).getValue())).concat(" ");
-
-//                                if (((Word) s).checkLength(wordLength)) {
-//                                    System.out.print(((Word) s).getValue());
-//                                    ((Word) s).changeWordWithSubstring(someSubstring);
-//                                    System.out.println(((Word) s).getValue());
-                                }
-                        newSentence = newSentence.replaceAll("\\b[a-zA-Z]{" + wordLength + "}\\b", someSubstring);
-                        //sentenceNew = sentence.replaceAll("\\b[a-zA-Z]{" + letterCount + "}\\b", word);
-
-                        System.out.print(newSentence);
-
-                    } else
-                        if (p instanceof Punctuation) {
-                            System.out.println(((Punctuation) p).getValue());
+                                newSentence = newSentence.concat(((Word) s).getValue()).concat(" ");  //  УДАЛИТЬ ПРОБЕЛ ПОСЛЕ ЗАПЯТОЙ  !!!!!
+                            } else if (s instanceof Punctuation)
+                                newSentence = newSentence.concat(Character.toString(((Punctuation) s).getValue())).concat(" ");
                         }
-                 //       }
-           //         }
+                        newSentence = newSentence.replaceAll("\\b[a-zA-Z]{" + wordLength + "}\\b", someSubstring);
+                        System.out.print(newSentence);
+                    } else if (p instanceof Punctuation) {
+                        System.out.println(((Punctuation) p).getValue());
+                    }
                 }
             }
         }
-
-
-
-//        for (Lexema txt: allTextInGeneralArray) {
-//            if ( txt instanceof Word) {
-//                if (((Word) txt).checkLength(wordLength)) {
-//                    ((Word) txt).setValue(someSubstring);
-//                    //System.out.println(txt);
-//                }
-//            }
-//        }
-//        //return str;
-//        //System.out.println(copyAllTextInGeneralArray);
+        LOG.debug("Changing the words finished completely. Please check the outputted textAsList before. " +
+                "The textAsList has been splits into sentences, and displayed each sentence in a new line.");
     }
 
 
@@ -140,7 +120,7 @@ public class Parser {
 
 //    public void createTextItems(ArrayList<Lexema> list) {
 //        ArrayList<Lexema> sentence;
-//        for (Lexema lex: allTextInGeneralArray) {
+//        for (Lexema lex: allTextInGeneralList) {
 //             if (lex instanceof Word == true) {
 //                 //sentence.add(lex);
 //            };
@@ -149,11 +129,11 @@ public class Parser {
 
 
 //    public String getInitialText(char[] chars) {
-//        String text = "";
+//        String textAsList = "";
 //        for (char c : chars) {
-//            text.concat(Character.toString(c));
+//            textAsList.concat(Character.toString(c));
 //        }
-//        return text;
+//        return textAsList;
 //    }
 
 }

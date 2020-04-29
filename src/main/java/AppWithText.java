@@ -14,23 +14,25 @@ public class AppWithText {
         LOG.debug("Program started.");
 
         Reader reader = new Reader();
-        reader.readFile(unc2);
-        //reader.readFile(unc);
+        reader.readFile(unc);
+        //reader.readFile(unc2);
 
-        //print text as chars. Transform after testing     ???????????????????
-//        reader.outputChars(reader.transformTextToArray(reader.getText()));
+        LOG.debug("We have the next text on the input:");
+        reader.outputChars(reader.transformTextToArray(reader.getText()));
+        System.out.println();
 
-        //parse text of chars to different classes
         Parser parser = new Parser();
         parser.parsText(reader.transformTextToArray(reader.getText()));
 
 
+//        System.out.println();
+//        parser.changeWordWithSubstring("AAA", 3);
 
-        parser.changeWordWithSubstring("AAA", 3);
+        LOG.debug("Another solution:");
+        System.out.println(parser.changeWordWithSubstring2(reader.getText(), "AAA", 3));
 
-        System.out.println(parser.getTextAsArray());
-        //System.out.println(parser.getAllTextInGeneralArray());
-
+        System.out.println();
+        System.out.println(parser.convertBackLexemaToString(parser.getTextAsList()));
 
     }
 }

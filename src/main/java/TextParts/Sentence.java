@@ -7,12 +7,6 @@ public class Sentence implements Lexema {
 
     public Sentence(ArrayList<Lexema> sentence) {
         this.sentence = sentence;
-        //sentence = new ArrayList<Lexema>();
-        //this.sentence = sentence;
-    }
-
-    public void addTosentence(Lexema lex) {
-        sentence.add(lex);
     }
 
     public ArrayList<Lexema> getSentence() {
@@ -25,4 +19,9 @@ public class Sentence implements Lexema {
                 "sentence=" + sentence +
                 '}';
     }
+
+    //    public void addTosentence(Lexema lex) {
+//        sentence.add(lex);
+//    }
+
 }
