@@ -36,7 +36,6 @@ public class Reader {
         return text.toCharArray();
     }
 
-    //delete after testing   !!!!!!!!!!!!
     public void outputChars(char[] chars)
     {
         for (char c: chars) {

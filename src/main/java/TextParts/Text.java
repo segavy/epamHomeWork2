@@ -13,14 +13,11 @@ public class Text implements Lexema{
         return text;
     }
 
-    public void writeText() {
-        System.out.println(text);
-    }
-
     @Override
     public String toString() {
         return "Text{" +
                 "text=" + text +
                 '}';
     }
+
 }

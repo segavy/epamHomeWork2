@@ -115,19 +115,6 @@ public class Parser {
                 "The textAsList has been splits into sentences, and displayed each sentence in a new line.");
     }
 
-
-
-
-//    public void createTextItems(ArrayList<Lexema> list) {
-//        ArrayList<Lexema> sentence;
-//        for (Lexema lex: allTextInGeneralList) {
-//             if (lex instanceof Word == true) {
-//                 //sentence.add(lex);
-//            };
-//        }
-//    }
-
-
 //    public String getInitialText(char[] chars) {
 //        String textAsList = "";
 //        for (char c : chars) {

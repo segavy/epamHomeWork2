@@ -2,7 +2,6 @@ import Reader.Reader;
 import Reader.Parser;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +29,12 @@ public class AppWithTextTest {
     }
 
     @Test
-    public void changeWordWithSubstring2TestTwoTextsShouldBeEquals() {
+    public void changeWordWithSubstring2Test_TwoTextsShouldBeEquals() {
         LOG.debug("Test #2 started.");
         String textToCheck = new String("A constructor in Java is a special method, that is used to initialize objects.\n" +
                 "AAA constructor is called when an object of a class is created. It AAA be used to AAA initial values AAA object attributes.\n" +
                 "Note, that AAA constructor name must match AAA class name, AAA it cannot have a return type. Also note, that AAA constructor is called when AAA object is created.\n");
         Assert.assertEquals(textToCheck, parser.changeWordWithSubstring2(reader.getText(), "AAA", 3));
         LOG.debug("Test #2 finished.");
-
     }
-
 }

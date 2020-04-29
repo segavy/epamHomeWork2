@@ -11,11 +11,6 @@ public class Punctuation implements Lexema{
         return punctuation;
     }
 
-    public String addPunctuationToString(String str) {
-        str = str.concat(Character.toString(this.punctuation));
-        return str;
-    }
-
     @Override
     public String toString() {
         return "Punctuation{" +

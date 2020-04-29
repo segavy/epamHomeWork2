@@ -24,14 +24,14 @@ public class AppWithText {
         Parser parser = new Parser();
         parser.parsText(reader.transformTextToArray(reader.getText()));
 
+        LOG.debug("The first solution:");
+        parser.changeWordWithSubstring("AAA", 3);
 
-//        System.out.println();
-//        parser.changeWordWithSubstring("AAA", 3);
-
-        LOG.debug("Another solution:");
+        LOG.debug("The second solution:");
         System.out.println(parser.changeWordWithSubstring2(reader.getText(), "AAA", 3));
 
         System.out.println();
+        LOG.debug("Now we will gather the initial text:");
         System.out.println(parser.convertBackLexemaToString(parser.getTextAsList()));
 
     }

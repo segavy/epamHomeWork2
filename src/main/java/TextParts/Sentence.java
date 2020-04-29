@@ -20,8 +20,4 @@ public class Sentence implements Lexema {
                 '}';
     }
 
-    //    public void addTosentence(Lexema lex) {
-//        sentence.add(lex);
-//    }
-
 }
