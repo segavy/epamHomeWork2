@@ -2,6 +2,6 @@ package TextParts;
 
 public interface Lexema {
 
-    //public void getValue();
+    void getValue();
 
 }
